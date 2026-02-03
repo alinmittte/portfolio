@@ -95,15 +95,17 @@
       word-break: break-all;
     }
 
-    /* Bild zwischen Header und About */
-    img.portrait {
-      display: block;             /* block für margin auto */
-      margin: 6em auto 2em auto;  /* viel Abstand oben (6em) und unten (2em) */
-      width: 35mm;                /* feste Breite */
-      height: 45mm;               /* feste Höhe */
-      object-fit: cover;          /* proportional zuschneiden */
-      border-radius: 5px;         /* optional: leicht abgerundet */
-    }
+ img.portrait {
+  position: fixed;          /* wichtig: frei über der seite */
+  top: 100px;
+  left: 100px;
+  width: 35mm;
+  height: 45mm;
+  object-fit: cover;
+  border-radius: 5px;
+  z-index: 10;              /* über dem rest */
+  pointer-events: none;    /* klicks gehen durch */
+}
 
   </style>
 </head>
@@ -185,9 +187,47 @@
   <footer>
     © 2026 aline iris schüpbach
   </footer>
+<script>
+  const dvd = document.querySelector('.portrait');
+
+  let x = Math.random() * (window.innerWidth - dvd.offsetWidth);
+  let y = Math.random() * (window.innerHeight - dvd.offsetHeight);
+
+  let vx = 1.2; // geschwindigkeit horizontal
+  let vy = 1.2; // geschwindigkeit vertikal
+
+  function animate() {
+    x += vx;
+    y += vy;
+
+    // rechte / linke kante
+    if (x + dvd.offsetWidth >= window.innerWidth || x <= 0) {
+      vx = -vx;
+    }
+
+    // untere / obere kante
+    if (y + dvd.offsetHeight >= window.innerHeight || y <= 0) {
+      vy = -vy;
+    }
+
+    dvd.style.left = x + 'px';
+    dvd.style.top = y + 'px';
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // bei resize neu einfangen
+  window.addEventListener('resize', () => {
+    x = Math.min(x, window.innerWidth - dvd.offsetWidth);
+    y = Math.min(y, window.innerHeight - dvd.offsetHeight);
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
