@@ -94,7 +94,14 @@
       word-break: break-all;
     }
 
-
+    /* Bild zwischen Header und About */
+    img.portrait {
+      display: block;             /* block für margin auto */
+      margin: 6em auto 2em auto;  /* viel Abstand oben (6em) und unten (2em) */
+      width: 35mm;                /* feste Breite */
+      height: 45mm;               /* feste Höhe */
+      object-fit: cover;          /* proportional zuschneiden */
+      border-radius: 5px;         /* optional: leicht abgerundet */
     }
 
   </style>
@@ -105,7 +112,12 @@
     <h1>aline iris schüpbach</h1>
     <p> <3 text <3 theater <3 und so <3 </p>
   </header>
-      
+
+  <!-- Bild zwischen Header und About -->
+  <img src="bilder/Screenshot 2026-02-03 020039.png.img" 
+       alt="Portrait von Aline Iris Schüpbach" 
+       class="portrait">
+
   <main>
 
     <section id="about">
@@ -175,7 +187,5 @@
 
 </body>
 </html>
-
-
 
 
